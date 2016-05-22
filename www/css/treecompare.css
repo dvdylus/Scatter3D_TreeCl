@@ -1,0 +1,43 @@
+
+.vis-container {
+    height: calc(100% - 60px);
+    padding: 0px;
+    width: 100%;
+}
+
+.vis-scale {
+    height: 60px;
+    width: 100%;
+    background-color: gray;
+    bottom: 0px;
+}
+
+.vis-scale-2 {
+    height: 60px;
+    width: 50%;
+    background-color: gray;
+    float: left;
+    bottom: 0px;
+}
+
+#vis-scale2 {
+    margin-left: 50%;
+}
+
+.vis-container-2 {
+    width: 50%;
+    float: right;
+    height: 100%;
+    padding: 0px;
+    width: 50%;
+    border-width: 0px;
+    border-style: solid;
+    border-right-width: 2px;
+    border-color: black;
+    height: calc(100% - 60px);
+}
+
+#vis-container2 {
+    border-width: 0px;
+    margin-left: 50%;
+}
