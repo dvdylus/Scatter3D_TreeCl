@@ -66,7 +66,7 @@
         loadedCallback: function() {},
         internalLabels: "none", //none, name, length, similarity
         enableDownloadButtons: true,
-        enableRerootFixedButtons: false,
+        enableFixedButtons: true,
         enableFisheyeZoom: false,
         zoomMode: "traditional", //semantic, traditional
         fitTree: "scale", //none, scale
@@ -2441,7 +2441,6 @@
 
         }
 
-        // draws buttons to swap one tree and not the other
         // draws buttons to swap one tree and not the other
         if (settings.enableFixedButtons) {
             var canvasLeft = "vis-container1";

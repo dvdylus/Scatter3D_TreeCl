@@ -58,6 +58,7 @@ Scatter3d = (function() {
     function drawScatterPlot(input_data){
         var x=[], y=[], z=[], ogs=[], cluster=[];
         var color_select = ['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a'];
+        var width = $("#left-panel").width();
 
         console.log(JSON.parse(input_data));
 
@@ -87,11 +88,11 @@ Scatter3d = (function() {
                 size: 4
             },
             hoverinfo: 'text'}];
-
+        console.log(width);
         var layout = {
             autosize: true,
-            height: 600,
-            width: 600,
+            height: width,
+            width: width,
             scene: {
                 aspectratio: {
                     x: 1,
@@ -141,16 +142,33 @@ Scatter3d = (function() {
                 log_ogs.push(infotext);
             console.log(log_ogs);
             var treecomp = TreeCompare.init({
+                enableFixedButtons: $("#rerootFixedButtons").val()
             });
 
-            var tree1 = treecomp.addTree(data_file[infotext].tree,undefined);
-            treecomp.changeSettings({
-                autoCollapse: tree1.data.autoCollapseDepth
-            });
-            $("#tree-container1").html('<div class="container-fluid vis-container" id="vis-container1"></div>');
-            treecomp.viewTree(tree1.name, "vis-container1", "vis-scale1");
-            $("#colorScale").empty();
-            //hoverInfo.innerHTML = infotext;
+            if(log_ogs.length > 1){
+                var tree1 = treecomp.addTree(data_file[log_ogs[log_ogs.length-2]].tree,undefined);
+                var tree2 = treecomp.addTree(data_file[log_ogs[log_ogs.length-1]].tree,undefined);
+                treecomp.changeSettings({
+                    autoCollapse: tree1.data.autoCollapseDepth
+                })
+                var collapseText = tree1.data.autoCollapseDepth === null ? "OFF" : tree1.data.autoCollapseDepth.toString();
+                $("#collapseAmount").html(collapseText);
+
+                treecomp.compareTrees(tree1.name, "vis-container1", tree2.name, "vis-container2", "vis-scale1", "vis-scale2");
+                $("#tree-container1").html('<div class="container-fluid vis-container-2" id="vis-container1"></div><div class="container-fluid vis-container-2" id="vis-container2"></div><div class="vis-scale-2" id="vis-scale1"></div><div class="vis-scale-2" id="vis-scale2"></div>');
+
+                $("#colorScale").html("<b>Similarity to most common node:</b>");
+                treecomp.renderColorScale("colorScale");
+            }else{
+                var tree1 = treecomp.addTree(data_file[infotext].tree,undefined);
+                treecomp.changeSettings({
+                    autoCollapse: tree1.data.autoCollapseDepth
+                });
+                $("#tree-container1").html('<div class="container-fluid vis-container" id="vis-container1"></div>');
+                treecomp.viewTree(tree1.name, "vis-container1", "vis-scale1");
+                $("#colorScale").empty();
+                //hoverInfo.innerHTML = infotext;
+            }
         });
 
         myPlot.on('plotly_unhover', function(data){
