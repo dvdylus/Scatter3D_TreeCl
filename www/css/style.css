@@ -80,7 +80,7 @@ html {
 }
 
 .vis-container {
-    height: calc(100% - 60px);
+    height: calc(100% - 100px);
     padding: 0px;
     position: absolute;
     width: 100%;
@@ -111,14 +111,13 @@ html {
     position: absolute;
     width: 50%;
     float: right;
-    height: 100%;
     padding: 0px;
     width: 50%;
     border-width: 0px;
     border-style: solid;
     border-right-width: 2px;
     border-color: black;
-    height: calc(100% - 60px);
+    height: calc(100% - 100px);
 }
 
 #vis-container2 {
