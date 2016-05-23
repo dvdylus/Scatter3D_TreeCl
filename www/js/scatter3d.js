@@ -86,13 +86,21 @@ Scatter3d = (function() {
             marker: {
                 color: cluster,
                 size: 4
-            },
-            hoverinfo: 'text'}];
+            }
+            //hoverinfo: 'text'
+        }];
         console.log(width);
         var layout = {
             autosize: true,
             height: width,
             width: width,
+            margin: {
+                l: 0,
+                r: 0,
+                b: 0,
+                t: 0,
+                pad: 0
+            },
             scene: {
                 aspectratio: {
                     x: 1,
@@ -139,8 +147,12 @@ Scatter3d = (function() {
             var points = data.points[0],
                 pointNum = points.pointNumber,
                 infotext = data.points[0].data.text[pointNum];
-                log_ogs.push(infotext);
-            console.log(log_ogs);
+                //info = infotext +': x= '+data_file[infotext].x+', y= '+data_file[infotext].y', z= '+data_file[infotext].z;
+            log_ogs.push(infotext);
+
+
+            //hoverInfo.innerHTML = info.join('');
+            console.log(data_file[infotext]);
             var treecomp = TreeCompare.init({
                 enableFixedButtons: $("#rerootFixedButtons").val()
             });
@@ -175,10 +187,6 @@ Scatter3d = (function() {
             hoverInfo.innerHTML = '';
         });
     }
-
-
-
-
 
     return {
         inputFile: inputFile
